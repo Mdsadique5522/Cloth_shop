@@ -48,9 +48,24 @@ const app = express();
  * Order matters! They execute top to bottom
  */
 
-// CORS middleware - allows frontend to make requests to this backend
-// Without this, browser blocks requests due to "same-origin policy"
-app.use(cors());
+// Define the list of allowed frontend URLs
+const allowedOrigins = [
+  'http://localhost:5173',  // Your local dev
+  'https://cloth-shop-57aae8lzz-md-saads-projects-37e0cfce.vercel.app' // Your live Vercel site
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 // JSON parser middleware - converts JSON request body to JavaScript object
 // Example: { "name": "John" } → req.body.name = "John"
