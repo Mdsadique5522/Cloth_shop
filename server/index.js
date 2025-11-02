@@ -49,10 +49,21 @@ const app = express();
  */
 
 // Define the list of allowed frontend URLs
+// app.use(cors({
+//   origin: [
+//     "http://localhost:5173",               // local development
+//    "https://cloth-shop-app.netlify.app" // ✅ Your actual live frontend URL
+//   ],
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
+
+// server/index.js file mein
 app.use(cors({
   origin: [
-    "http://localhost:5173",               // local development
-   "https://cloth-shop-app.netlify.app" // ✅ Your actual live frontend URL
+    "http://localhost:5173",
+    "https://cloth-shop-app.netlify.app",
+    "https://cloth-shop-c6qn.onrender.com" // <-- YEH ADD KARIYE
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
