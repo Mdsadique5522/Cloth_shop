@@ -52,7 +52,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",               // local development
-    "https://cloth-shop-liard.vercel.app"  // ✅ your actual live frontend URL
+   "https://cloth-shop-app.netlify.app" // ✅ Your actual live frontend URL
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
