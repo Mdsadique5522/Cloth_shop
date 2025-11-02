@@ -49,22 +49,13 @@ const app = express();
  */
 
 // Define the list of allowed frontend URLs
-const allowedOrigins = [
-  'http://localhost:5173',  // Your local dev
-  'https://cloth-shop-57aae8lzz-md-saads-projects-37e0cfce.vercel.app' // Your live Vercel site
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
+  origin: [
+    "http://localhost:5173",               // local development
+    "https://cloth-shop-liard.vercel.app"  // ✅ your actual live frontend URL
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 
 // JSON parser middleware - converts JSON request body to JavaScript object
@@ -106,7 +97,8 @@ app.get('/api/health', (req, res) => {
  * Uses async/await pattern (.then() is same as await)
  */
 const PORT = process.env.PORT || 5000;  // Use PORT from .env, or default to 5000
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/fashion-shop';
+const MONGO_URI = process.env.MONGO_URI; 
+  // || 'mongodb://localhost:27017/fashion-shop';
 
 // Connect to MongoDB database
 mongoose
