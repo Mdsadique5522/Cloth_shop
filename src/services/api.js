@@ -12,8 +12,8 @@
 // Get API base URL from environment variable or use default
 // import.meta.env is Vite's way to access environment variables
 // If VITE_API_URL exists, use it; otherwise use localhost
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
+// const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = 'https://cloth-shop-c6qn.onrender.com/api';
 /**
  * HELPER FUNCTION: Get Authentication Token
  * Retrieves JWT token from browser's localStorage
