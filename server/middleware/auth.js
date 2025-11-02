@@ -55,7 +55,9 @@ export const authenticate = async (req, res, next) => {
     // Verify token using the same secret key used to create it
     // jwt.verify() throws an error if token is invalid or expired
     // If valid, it returns the decoded data (we stored { userId } in it)
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // Use same default secret as generateToken for consistency
+    const jwtSecret = process.env.JWT_SECRET || 'default-jwt-secret-for-development-change-in-production';
+    const decoded = jwt.verify(token, jwtSecret);
     
     // Find user in database using ID from token
     // decoded.userId was stored when we created the token

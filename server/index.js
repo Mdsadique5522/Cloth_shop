@@ -32,6 +32,12 @@ import orderRoutes from './routes/orderRoutes.js';
 // This gives us access to PORT, MONGO_URI, JWT_SECRET, etc.
 dotenv.config();
 
+// Check if JWT_SECRET is configured, warn if using default
+if (!process.env.JWT_SECRET) {
+  console.warn('⚠️  WARNING: JWT_SECRET not found in .env file. Using default secret for development.');
+  console.warn('⚠️  For production, create a .env file with: JWT_SECRET=your-strong-random-secret-key');
+}
+
 // Create Express application instance
 // This is our server - it handles HTTP requests and responses
 const app = express();
@@ -70,7 +76,7 @@ app.use('/api/orders', orderRoutes);       // Order creation and management
  * HEALTH CHECK ROUTE
  * Simple endpoint to verify server is running
  * Useful for monitoring and testing
- * 
+ * image.png
  * GET /api/health returns: { status: 'OK', message: 'Server is running' }
  */
 app.get('/api/health', (req, res) => {

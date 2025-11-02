@@ -41,11 +41,15 @@ const router = express.Router();
  * 4. Server verifies token to identify user
  */
 const generateToken = (userId) => {
+  // Use JWT_SECRET from .env file, or a default secret for development
+  // WARNING: In production, always set JWT_SECRET in .env file for security!
+  const jwtSecret = process.env.JWT_SECRET || 'default-jwt-secret-for-development-change-in-production';
+  
   // jwt.sign() creates a token
   // First param: data to encode (userId)
-  // Second param: secret key (from .env file)
+  // Second param: secret key (from .env file or default)
   // Third param: options (expires in 7 days)
-  return jwt.sign({ userId }, process.env.JWT_SECRET, {
+  return jwt.sign({ userId }, jwtSecret, {
     expiresIn: '7d',  // Token expires after 7 days
   });
 };
